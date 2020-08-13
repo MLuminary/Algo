@@ -31,3 +31,5 @@ a[k]_address = base_address + (k-1) * type_size
 ## 低效的「插入」和「删除」
 
 为了保持内存数据的连续性，会导致插入、删除这两个操作比较低效。
+
+[Js 数组](https://github.com/MLuminary/Algo/blob/master/basic/data-structure/array/array.md)
