@@ -1,9 +1,4 @@
-/**
- * 单链表
- * 包含单链表的插入、删除、翻转、查找、检测是否为环等
- */
-
-class SingleNode<T> {
+export class SingleNode<T> {
   public value: T
   public next: SingleNode<T> | null
 
@@ -13,13 +8,13 @@ class SingleNode<T> {
   }
 }
 
-class SingleList<T> {
-  private readonly head: SingleNode<any>
+export class SingleList<T> {
+  private readonly head: SingleNode<T>
   constructor() {
-    this.head = new SingleNode(null) // 头结点为哨兵结点
+    this.head = new SingleNode<any>(null) // 头结点为哨兵结点
   }
 
-  findLast(): SingleNode<T> {
+  findLast() {
     let curNode = this.head
     while (curNode.next) {
       curNode = curNode.next
@@ -32,41 +27,41 @@ class SingleList<T> {
     lastNode.next = new SingleNode(value)
   }
   // 顺序查找第一个元素
-  findByValue(value: T): SingleNode<T> | null {
-    let curNode = this.head
-    while (curNode.next && curNode.value !== value) {
+  find(value: T) {
+    let curNode: SingleNode<T> | null = this.head
+    while (curNode && curNode.value !== value) {
       curNode = curNode.next
     }
 
-    return curNode.next === null && curNode.value !== value ? null : curNode
+    return curNode
   }
   // 顺序查找第一个元素
   findIndexByValue(value: T, start = 0): number {
     if (!value) {
       return -1
     }
-    let curNode = this.head
+    let curNode: SingleNode<T> | null = this.head
     let curIndex = -1
-    while (curNode.next && (curNode.value !== value || curIndex < start)) {
+    while (curNode && (curNode.value !== value || curIndex < start)) {
       curNode = curNode.next
       curIndex++
     }
 
-    return curNode.next === null && curNode.value !== value ? -1 : curIndex
+    return curNode ? curIndex : -1
   }
 
   findByIndex(index = 0): SingleNode<T> | null {
     if (index < 0) {
       return null
     }
-    let curNode = this.head
+    let curNode: SingleNode<T> | null = this.head
     let curIndex = -1 // 隐藏掉 head 结点
-    while (curNode.next && curIndex !== index) {
+    while (curNode && curIndex !== index) {
       curNode = curNode.next
       curIndex++
     }
-    // 如果 curNode 是最后一个结点且 index 与 curIndex 不相等的话则返回 null
-    return curNode.next === null && curIndex !== index ? null : curNode
+
+    return curNode
   }
 
   insert(index: number, value: T) {
@@ -85,7 +80,7 @@ class SingleList<T> {
     while (curNode.next && curNode.next.value !== value) {
       curNode = curNode.next
     }
-
+    // 如果 prev 为最后一个元素则返回 null
     return curNode.next === null ? null : curNode
   }
 
@@ -143,21 +138,11 @@ singleList.append(2)
 singleList.append(4)
 singleList.append(7)
 singleList.append(2)
-singleList.insert(0, 5)
-console.info(singleList.findByValue(7))
-console.info(singleList.findByIndex(3))
+console.info(singleList.find(3))
+console.info(singleList.findByIndex(4))
 console.info(singleList.findIndexByValue(2, 3))
 singleList.remove(2)
-singleList.display()
-singleList.reverse()
-singleList.append(4)
-singleList.append(7)
-singleList.append(2)
-singleList.insert(0, 5)
-console.info(singleList.findByValue(7))
-console.info(singleList.findByIndex(3))
-console.info(singleList.findIndexByValue(2, 3))
-singleList.remove(2)
+singleList.append(8)
 singleList.display()
 singleList.reverse()
 singleList.display()
