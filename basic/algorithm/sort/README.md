@@ -93,3 +93,76 @@ const selectionSort = <T>(arr: T[]) => {
   return arr
 }
 ```
+
+## 归并排序
+
+归并排序「MERGE-SORT」是利用归并的思想实现的排序方法，该算法采用经典的分治「divide-and-conquer」策略（分治法将问题分成一些小的问题然后递归求解，而治的阶段则将分的阶段得到的各答案"修补"在一起，即分而治之)。
+
+### 思路分解图
+
+![mergeSort](img/mergeSort.jpg)
+
+### 演示动图
+
+![merge-sort](img/mergeSort.gif)
+
+### 代码实现
+
+```ts
+const array = [4, 2, 5, 1, 6, 3]
+
+const mergeSort = (arr: number[]) => {
+  mergerSortIteration(arr, 0, arr.length - 1)
+}
+
+const mergerSortIteration = (arr: number[], l: number, r: number) => {
+  // 当排序数组中只有一个值时，返回该值
+  if (l >= r) {
+    return
+  }
+
+  const mid = Math.floor(l + (r - l) / 2)
+  // 左侧递归排序
+  mergerSortIteration(arr, l, mid)
+  // 右侧递归排序
+  mergerSortIteration(arr, mid + 1, r)
+  // 将排好序的数组合并
+  merge(arr, l, mid, r)
+}
+```
+
+对于两边有序的数组可以快速按序的合并
+
+![mergeSort2](img/mergeSort2.jpg)
+
+```ts
+const merge = (arr: number[], l: number, mid: number, r: number) => {
+  const temp = []
+  let k = 0
+  let i = l
+  let j = mid + 1
+
+  while (i <= mid && j <= r) {
+    if (arr[i] < arr[j]) {
+      temp[k++] = arr[i++]
+    } else {
+      temp[k++] = arr[j++]
+    }
+  }
+
+  let start = i
+  let end = mid
+  if (j <= r) {
+    start = j
+    end = r
+  }
+  // 将左右侧剩余的数据添加的 temp 数组中去
+  while (start <= end) {
+    temp[k++] = arr[start++]
+  }
+  // 将 temp 的数组拷贝到 arr
+  for (let n = 0; n <= r - l; n++) {
+    arr[n + l] = temp[n]
+  }
+}
+```
