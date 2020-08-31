@@ -166,3 +166,39 @@ const merge = (arr: number[], l: number, mid: number, r: number) => {
   }
 }
 ```
+
+可以利用哨兵去简化合并的代码
+
+```ts
+const mergeFunc = (arr: number[], l: number, mid: number, r: number) => {
+  const leftArr = []
+  const rightArr = []
+
+  let i = 0
+  while (i <= mid - l) {
+    leftArr[i] = arr[i + l]
+    i++
+  }
+  // 添加哨兵
+  leftArr.push(Infinity)
+
+  let j = 0
+  while (j < r - mid) {
+    rightArr[j] = arr[mid + j + 1]
+    j++
+  }
+  // 添加哨兵
+  rightArr.push(Infinity)
+
+  let k = l
+  let lIndex = 0
+  let rIndex = 0
+  while (k <= r) {
+    if (leftArr[lIndex] < rightArr[rIndex]) {
+      arr[k++] = leftArr[lIndex++]
+    } else {
+      arr[k++] = rightArr[rIndex++]
+    }
+  }
+}
+```
