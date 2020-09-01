@@ -16,7 +16,7 @@
 
 ## 冒泡排序
 
-冒泡排序是一种交换排序，它的基本思想是：两两比较相邻记录的关键字，如果反序则交换，直到没有反序的记录为止。
+> 冒泡排序是一种交换排序，它的基本思想是：两两比较相邻记录的关键字，如果反序则交换，直到没有反序的记录为止。
 
 ![bubbleSort](img/bubbleSort.gif)
 
@@ -46,7 +46,7 @@ const bubbleSort = <T>(arr: T[]) => {
 
 ## 插入排序
 
-插入排序，一般也被称为直接插入排序。对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中。在其实现过程使用双层循环，外层循环对除了第一个元素之外的所有元素，内层循环对当前元素前面有序表进行待插入位置查找，并进行移动
+> 插入排序，一般也被称为直接插入排序。对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中。在其实现过程使用双层循环，外层循环对除了第一个元素之外的所有元素，内层循环对当前元素前面有序表进行待插入位置查找，并进行移动
 
 ![insertionSort](img/insertionSort.gif)
 
@@ -72,7 +72,7 @@ const insertionSort = <T>(arr: T[]) => {
 
 ## 选择排序
 
-选择排序是一种简单直观的排序算法。它的工作原理是：第一次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置，然后再从剩余的未排序元素中寻找到最小（大）元素，然后放到已排序的序列的末尾。以此类推，直到全部待排序的数据元素的个数为零。
+> 选择排序是一种简单直观的排序算法。它的工作原理是：第一次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置，然后再从剩余的未排序元素中寻找到最小（大）元素，然后放到已排序的序列的末尾。以此类推，直到全部待排序的数据元素的个数为零。
 
 ![selectionSort](img/selectionSort.gif)
 
@@ -96,7 +96,7 @@ const selectionSort = <T>(arr: T[]) => {
 
 ## 归并排序
 
-归并排序「MERGE-SORT」是利用归并的思想实现的排序方法，该算法采用经典的分治「divide-and-conquer」策略（分治法将问题分成一些小的问题然后递归求解，而治的阶段则将分的阶段得到的各答案"修补"在一起，即分而治之)。
+> 归并排序「MERGE-SORT」是利用归并的思想实现的排序方法，该算法采用经典的分治「divide-and-conquer」策略（分治法将问题分成一些小的问题然后递归求解，而治的阶段则将分的阶段得到的各答案"修补"在一起，即分而治之)。
 
 ### 思路分解图
 
@@ -200,5 +200,63 @@ const mergeFunc = (arr: number[], l: number, mid: number, r: number) => {
       arr[k++] = rightArr[rIndex++]
     }
   }
+}
+```
+
+## 快速排序
+
+> 快速排序，又称分区交换排序，简称快排，一种排序算法，最早由东尼·霍尔提出。快速排序使用分治法策略来把一个序列分为较小和较大的 2 个子序列，然后递归地排序两个子序列。
+
+快速排序为自上而下，而归并排序是自下而上的
+
+## 思路分解图
+
+![quickSort1](img/quickSort1.jpg)
+
+这张图采用的是额外创建两个数组来排序，这里只是方便演示，其实是可以原地排序的。
+
+## 演示动图
+
+![quickSort](img/quickSort.gif)
+
+## 代码
+
+```ts
+const array = [4, 2, 5, 1, 6, 3]
+
+const quickSort = (arr: number[]) => {
+  quickSortInner(arr, 0, arr.length - 1)
+}
+
+const quickSortInner = (arr: number[], l: number, r: number) => {
+  if (l >= r) return
+
+  const q = participant(arr, l, r)
+  quickSortInner(arr, l, q - 1)
+  quickSortInner(arr, q + 1, r)
+}
+```
+
+![quickSort2](img/quickSort2.jpg)
+
+采用原地排序，从左到右依次遍历，如果比基准值小的话转换到数组的前半部分，遍历完后再将基准值交换
+
+```ts
+const participant = (arr: number[], l: number, r: number): number => {
+  const refer = arr[r]
+  let k = l
+  for (let i = l; i < r; i++) {
+    if (arr[i] < refer) {
+      const temp = arr[i]
+      arr[i] = arr[k]
+      arr[k] = temp
+      k++
+    }
+  }
+  // 最后将 refer 放到「中间」
+  arr[r] = arr[k]
+  arr[k] = refer
+
+  return k
 }
 ```
