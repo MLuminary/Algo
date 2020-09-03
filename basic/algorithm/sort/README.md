@@ -283,14 +283,14 @@ const participant = (arr: number[], l: number, r: number): number => {
 
 考生的成绩从 0 到 5 分，我们使用大小为 6 的数组 `C[6]` 表示桶，其中下标对应分数。不过，`C[6]` 内存储的并不是考生，而是对应的考生个数。像我刚刚举的那个例子，我们只需要遍历一遍考生分数，就可以得到 `C[6]` 的值
 
-![countingSort1](countingSort1.jpg)
+![countingSort1](img/countingSort1.jpg)
 
 为了快速计算出每个分数的考生在序列中的位置，我们采取一个比较巧妙的思路。我们首先对 `C[6]` 数组中的值顺序求和，得到如下数据
 
-![countingSort2](countingSort2.jpg)
+![countingSort2](img/countingSort2.jpg)
 
 然后我们从后往前遍历数组 A, 首先拿到数值 3，然后去查看 `C[3]` 为 7，则证明小于等于 3 的数值有 7 个，此时创建一个数组 R，并把 `R[7]` 置为 3，然后将 `C[3]` 减 1。依次类推，如下图所示
 
-![countingSort3](countingSort3.jpg)
+![countingSort3](img/countingSort3.jpg)
 
 计数排序只能用在数据范围不大的场景中，如果数据范围 k 比要排序的数据 n 大很多，就不适合用计数排序了。而且，计数排序只能给非负整数排序，如果要排序的数据是其他类型的，要将其在不改变相对大小的情况下，转化为非负整数。
