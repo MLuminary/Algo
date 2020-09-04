@@ -294,3 +294,49 @@ const participant = (arr: number[], l: number, r: number): number => {
 ![countingSort3](img/countingSort3.jpg)
 
 计数排序只能用在数据范围不大的场景中，如果数据范围 k 比要排序的数据 n 大很多，就不适合用计数排序了。而且，计数排序只能给非负整数排序，如果要排序的数据是其他类型的，要将其在不改变相对大小的情况下，转化为非负整数。
+
+## 基数排序
+
+> 基数排序是一种非比较型整数排序算法，其原理是将整数按位切割成不同的数字，然后按每个位数来分配桶
+
+![radixSort](img/radixSort.gif)
+
+假设我们有 10 万个手机号码，我们要比较其大小。因为手机号码有 11 位，范围太大，因此不适合用以上两种排序算法。借助稳定排序算法，我们可以先按照最后一位来排序，然后再按照倒数第二位，以此类推，最后按照第一位重新排序，那手机号码就是有序的了。
+
+根据每一位来排序，我们可以用刚讲过的桶排序或者计数排序，它们的时间复杂度可以做到 O(n)。如果要排序的数据有 k 位，那我们就需要 k 次桶排序或者计数排序，总的时间复杂度是 O(k\*n)。当 k 不大的时候，比如手机号码排序的例子，k 最大就是 11，所以基数排序的时间复杂度就近似于 O(n)。
+
+基数排序对要排序的数据是有要求的，需要可以分割出独立的“位”来比较，而且位之间有递进的关系，如果 a 数据的高位比 b 数据大，那剩下的低位就不用比较了。除此之外，每一位的数据范围不能太大，要可以用线性排序算法来排序，否则，基数排序的时间复杂度就无法做到 O(n) 了
+
+```ts
+let arr = [12, 24, 25, 13, 36, 48, 88, 30, 46, 65]
+
+const radixSort = (array: number[], radix: number) => {
+  const counter: number[][] = []
+  let mod = 10
+  let dev = 1
+  for (let i = 0; i < radix; i++) {
+    // 按照当前位将数据分桶装起来
+    for (let j = 0; j < arr.length; j++) {
+      const modNumber = Math.floor((arr[j] / dev) % mod)
+      if (!counter[modNumber]) {
+        counter[modNumber] = []
+      }
+      counter[modNumber].push(arr[j])
+    }
+
+    let pos = 0
+    // 按照顺序替换当前数组
+    for (let k = 0; k < counter.length; k++) {
+      while (counter[k] && counter[k].length) {
+        const value = counter[k].shift()
+        arr[pos++] = value!
+      }
+    }
+
+    dev *= 10
+    mod *= 10
+  }
+}
+
+radixSort(arr, 2)
+```
