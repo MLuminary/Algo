@@ -10,18 +10,17 @@
 
 我们假设只有 10 个订单，订单金额分别是：8，11，19，23，27，33，45，55，67，98。利用二分思想，每次都与区间的中间数据比对大小，缩小查找区间的范围。为了更加直观，我画了一张查找过程的图。其中，low 和 high 表示待查找区间的下标，mid 表示待查找区间的中间元素下标。
 
-![binarySort](img/binarySort.jpg)
+![binarySearch](img/binarySearch.jpg)
 
 ### 简单实现
 
 ```ts
-const binarySort = (value: number) => {
+const binarySearch = (value: number) => {
   let low = 0
   let high = arr.length - 1
 
   while(low <= high) {
     const mid = Math.floor((high + low) / 2)
-    console.info(mid)
     if (arr[mid] === value) {
       return mid
     } else if(arr[mid] < value) {
@@ -32,5 +31,31 @@ const binarySort = (value: number) => {
   }
 
   return -1
+}
+```
+
+### 变体
+
+二分查找的变形问题有很多，我们只选择一个典型的来记录：「查找第一个值等于给定值的元素」
+
+```ts
+const binarySearchFirst = (value: number) => {
+  let low = 0
+  let high = arr.length - 1
+
+  while (low <= high) {
+    const mid = Math.floor((high + low) / 2)
+    if (arr[mid] > value) {
+      high = mid - 1
+    } else if (arr[mid] < value) {
+      low = mid + 1
+    } else {
+      if (mid === 0 || arr[mid - 1] !== value) {
+        return mid
+      } else {
+        high = mid - 1
+      }
+    }
+  }
 }
 ```
