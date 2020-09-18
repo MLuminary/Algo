@@ -1,3 +1,5 @@
+import { isEqual } from './../../utils/utils'
+
 export class SingleNode<T> {
   public value: T
   public next: SingleNode<T> | null
@@ -26,15 +28,26 @@ export class SingleList<T> {
     const lastNode = this.findLast()
     lastNode.next = new SingleNode(value)
   }
+
   // 顺序查找第一个元素
-  find(value: T) {
+  find({ value, callback }: {value?: T, callback?: (value: T) => boolean}) {
     let curNode: SingleNode<T> | null = this.head
-    while (curNode && curNode.value !== value) {
+    while (curNode) {
+
+      if (callback && callback(curNode.value)) {
+        return curNode
+      }
+
+      if (isEqual(curNode.value, value)) {
+        return curNode
+      }
+
       curNode = curNode.next
     }
 
-    return curNode
+    return null
   }
+
   // 顺序查找第一个元素
   findIndexByValue(value: T, start = 0): number {
     if (!value) {
@@ -42,7 +55,7 @@ export class SingleList<T> {
     }
     let curNode: SingleNode<T> | null = this.head
     let curIndex = -1
-    while (curNode && (curNode.value !== value || curIndex < start)) {
+    while (curNode && (!isEqual(curNode.value, value) || curIndex < start)) {
       curNode = curNode.next
       curIndex++
     }
@@ -75,9 +88,18 @@ export class SingleList<T> {
     curNode.next = insertNode
   }
 
-  findPrev(value: T): SingleNode<T> | null {
+  findPrev({ value, callback }: {value?: T, callback?: (value: T) => boolean}): SingleNode<T> | null {
     let curNode = this.head
-    while (curNode.next && curNode.next.value !== value) {
+    while (curNode.next) {
+
+      if(callback && callback(curNode.next.value)) {
+        return curNode
+      }
+
+      if(isEqual(curNode.next.value, value)) {
+        return curNode
+      }
+
       curNode = curNode.next
     }
     // 如果 prev 为最后一个元素则返回 null
@@ -98,7 +120,7 @@ export class SingleList<T> {
     let result = 'head'
     while (curNode.next) {
       curNode = curNode.next
-      result += `->${curNode.value}`
+      result += `->${JSON.stringify(curNode.value)}`
     }
     console.info(result)
   }
@@ -138,7 +160,7 @@ singleList.append(2)
 singleList.append(4)
 singleList.append(7)
 singleList.append(2)
-console.info(singleList.find(3))
+console.info(singleList.find({value: 3}))
 console.info(singleList.findByIndex(4))
 console.info(singleList.findIndexByValue(2, 3))
 singleList.remove(2)
