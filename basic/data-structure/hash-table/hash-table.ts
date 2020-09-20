@@ -70,7 +70,7 @@ class HashTable<T extends Value> {
       const item = this.buckets[index]
       if (item instanceof SingleList) {
         const prevNode = item.findPrev({
-          callback: (value) => value.key === key
+          callback: (value) => value.key === key,
         })
         if (prevNode) {
           prevNode.next = prevNode.next!.next
@@ -93,8 +93,3 @@ hashTable.put({ key: 241202, name: '杨八' })
 hashTable.delete(221301)
 
 console.info(hashTable)
-
-
-
-
-

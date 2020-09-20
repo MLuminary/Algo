@@ -19,11 +19,11 @@ const binarySearch = (value: number) => {
   let low = 0
   let high = arr.length - 1
 
-  while(low <= high) {
+  while (low <= high) {
     const mid = Math.floor((high + low) / 2)
     if (arr[mid] === value) {
       return mid
-    } else if(arr[mid] < value) {
+    } else if (arr[mid] < value) {
       low = mid + 1
     } else {
       high = mid - 1

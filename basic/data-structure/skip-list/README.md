@@ -151,7 +151,7 @@ const nodes = [
   { sortKey: 8, value: 'haoqin3' },
   { sortKey: 5, value: 'haoqin4' },
   { sortKey: 2, value: 'haoqin5' },
-  { sortKey: 3, value: 'haoqin6' }
+  { sortKey: 3, value: 'haoqin6' },
 ]
 
 const list = new SkipList()
@@ -165,4 +165,3 @@ console.info(list.findNode(4))
 ## 参考链接
 
 https://juejin.im/post/6844903446475177998#heading-6
-

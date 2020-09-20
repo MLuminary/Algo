@@ -67,20 +67,22 @@ Js 的数组提供了非常多的方法，我们这里将其分为三类：改�
 定义：通过删除或替换现有元素或者原地添加新的元素来修改数组, 并以数组形式返回被修改的内容。
 
 参数：
-  - start： 指定修改开始的位置
-  - deleteCount?： 移除元素的个数「含 start 位」
-  - item1, item2...?： 向数组添加的新元素
+
+- start： 指定修改开始的位置
+- deleteCount?： 移除元素的个数「含 start 位」
+- item1, item2...?： 向数组添加的新元素
 
 返回值： 由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。
 
 **sort**
 
-定义： 用原地算法对数组的元素进行排序，并返回数组。默认排序顺序是在将元素转换为字符串，然后比较它们的UTF-16代码单元值序列时构建的
+定义： 用原地算法对数组的元素进行排序，并返回数组。默认排序顺序是在将元素转换为字符串，然后比较它们的 UTF-16 代码单元值序列时构建的
 
 参数：
-  - compareFunction?： 用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的 Unicode 位点进行排序。
-    - firstEl： 第一个用于比较的元素。
-    - secondEl： 第二个用于比较的元素。
+
+- compareFunction?： 用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的 Unicode 位点进行排序。
+  - firstEl： 第一个用于比较的元素。
+  - secondEl： 第二个用于比较的元素。
 
 返回值： 排序后的数组。请注意，数组已原地排序，并且不进行复制。
 
@@ -109,9 +111,10 @@ Js 的数组提供了非常多的方法，我们这里将其分为三类：改�
 定义： 浅复制数组的一部分到同一数组中的另一个位置，并返回它，不会改变原数组的长度
 
 参数：
-  - target： 复制序列到该位置
-  - start?： 开始复制元素的起始位置，若忽略则从 0 开始
-  - end?： 复制元素的结束位置「但不包括」，若忽略则为 arr.length
+
+- target： 复制序列到该位置
+- start?： 开始复制元素的起始位置，若忽略则从 0 开始
+- end?： 复制元素的结束位置「但不包括」，若忽略则为 arr.length
 
 返回值： 改变后的数组
 
@@ -120,9 +123,10 @@ Js 的数组提供了非常多的方法，我们这里将其分为三类：改�
 定义： 方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。不包括终止索引。
 
 参数：
-  - value： 用来填充数组元素的值
-  - start?： 起始索引，默认为 0
-  - end?： 终止索引，默认为 arr.length
+
+- value： 用来填充数组元素的值
+- start?： 起始索引，默认为 0
+- end?： 终止索引，默认为 arr.length
 
 返回值： 修改后的数组
 
@@ -145,11 +149,12 @@ console.log(array3)
 
 **includes**
 
-定义：方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回false。
+定义：方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回 false。
 
 参数：
- - value: 需要查找的元素
- - fromIndex?: 从 fromIndex 开始查找。 默认为 0
+
+- value: 需要查找的元素
+- fromIndex?: 从 fromIndex 开始查找。 默认为 0
 
 返回值：true or false
 
@@ -172,7 +177,7 @@ console.log(elements.join('-'))
 
 **slice**
 
-定义：方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）
+定义：方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括 end）
 
 ```js
 const animals = ['ant', 'bison', 'camel', 'duck', 'elephant']
@@ -203,8 +208,9 @@ console.log(array1.toString())
 定义：返回一个字符串表示数组中的元素。数组中的元素将使用各自的 toLocaleString 方法转成字符串，这些字符串将使用一个特定语言环境的字符串（例如一个逗号 ","）隔开。[详细说明](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/toLocaleString)
 
 参数：
- - locales?：带有BCP 47语言标记的字符串或字符串数组
- - options?：一个可配置属性的对象
+
+- locales?：带有 BCP 47 语言标记的字符串或字符串数组
+- options?：一个可配置属性的对象
 
 ```js
 var prices = ['￥7', 500, 8123, 12]
@@ -218,20 +224,22 @@ prices.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' })
 定义：方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回 -1。
 
 参数：
- - searchElement: 想要查找的元素
- - fromIndex?: 开始搜寻的索引位置
+
+- searchElement: 想要查找的元素
+- fromIndex?: 开始搜寻的索引位置
 
 **lastIndexOf**
 
 定义：lastIndexOf() 方法返回指定元素（也即有效的 JavaScript 值或变量）在数组中的最后一个的索引，如果不存在则返回 -1。从数组的后面向前查找。
 
 参数：
- - searchElement: 想要查找的元素
- - fromIndex?: 开始逆向搜寻的索引位置
+
+- searchElement: 想要查找的元素
+- fromIndex?: 开始逆向搜寻的索引位置
 
 ### 遍历方法
 
-在下面的众多遍历方法中，有很多方法都需要指定一个回调函数作为参数。在每一个数组元素都分别执行完回调函数之前，数组的length属性会被缓存在某个地方，所以，**如果你在回调函数中为当前数组添加了新的元素，那么那些新添加的元素是不会被遍历到的**。此外，如果在回调函数中对当前数组进行了其它修改，比如改变某个元素的值或者删掉某个元素，那么随后的遍历操作可能会受到未预期的影响。总之，**不要尝试在遍历过程中对原数组进行任何修改**，虽然规范对这样的操作进行了详细的定义，但为了可读性和可维护性，请不要这样做。
+在下面的众多遍历方法中，有很多方法都需要指定一个回调函数作为参数。在每一个数组元素都分别执行完回调函数之前，数组的 length 属性会被缓存在某个地方，所以，**如果你在回调函数中为当前数组添加了新的元素，那么那些新添加的元素是不会被遍历到的**。此外，如果在回调函数中对当前数组进行了其它修改，比如改变某个元素的值或者删掉某个元素，那么随后的遍历操作可能会受到未预期的影响。总之，**不要尝试在遍历过程中对原数组进行任何修改**，虽然规范对这样的操作进行了详细的定义，但为了可读性和可维护性，请不要这样做。
 
 **forEach**
 
@@ -241,7 +249,7 @@ tips: 除了抛出异常以外，没有办法中止或跳出 `forEach` 循环。
 
 **entries**
 
-定义：方法返回一个新的Array Iterator对象，该对象包含数组中每个索引的键/值对。
+定义：方法返回一个新的 Array Iterator 对象，该对象包含数组中每个索引的键/值对。
 
 ```js
 const array1 = ['a', 'b', 'c']
@@ -270,7 +278,7 @@ console.log(array1.every(isBelowThreshold))
 
 **some**
 
-定义：方法测试数组中是不是至少有1个元素通过了被提供的函数测试。它返回的是一个Boolean类型的值。
+定义：方法测试数组中是不是至少有 1 个元素通过了被提供的函数测试。它返回的是一个 Boolean 类型的值。
 
 ```js
 const array = [1, 2, 3, 4, 5]
@@ -289,7 +297,7 @@ console.log(array.some(even))
 ```js
 const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present']
 
-const result = words.filter(word => word.length > 6)
+const result = words.filter((word) => word.length > 6)
 
 console.log(result)
 // expected output: Array ["exuberant", "destruction", "present"]
@@ -302,7 +310,7 @@ console.log(result)
 ```js
 const array1 = [5, 12, 8, 130, 44]
 
-const found = array1.find(element => element > 10)
+const found = array1.find((element) => element > 10)
 
 console.log(found)
 // expected output: 12
@@ -346,7 +354,7 @@ for (const key of iterator) {
 const array1 = [1, 4, 9, 16]
 
 // pass a function to map
-const map1 = array1.map(x => x * 2)
+const map1 = array1.map((x) => x * 2)
 
 console.log(map1)
 // expected output: Array [2, 8, 18, 32]
@@ -357,12 +365,13 @@ console.log(map1)
 定义：方法对数组中的每个元素执行一个由您提供的 reducer 函数(升序执行)，将其结果汇总为单个返回值。
 
 参数：
-  - callback: 执行数组中每个值 (如果没有提供 initialValue则第一个值除外)的函数
-    - accumulator: 累计器累计回调的返回值 它是上一次调用回调时返回的累积值，或initialValue（见于下方）。
-    - currentValue: 数组中正在处理的元素。
-    - index?: 数组中正在处理的当前元素的索引。 如果提供了initialValue，则起始索引号为 0，否则从索引 1 起始。
-    - array?: 调用 reduce() 的数组
-  - initialValue?: 作为第一次调用 callback 函数时的第一个参数的值。 如果没有提供初始值，则将使用数组中的第一个元素。 **在没有初始值的空数组上调用 reduce 将报错**
+
+- callback: 执行数组中每个值 (如果没有提供 initialValue 则第一个值除外)的函数
+  - accumulator: 累计器累计回调的返回值 它是上一次调用回调时返回的累积值，或 initialValue（见于下方）。
+  - currentValue: 数组中正在处理的元素。
+  - index?: 数组中正在处理的当前元素的索引。 如果提供了 initialValue，则起始索引号为 0，否则从索引 1 起始。
+  - array?: 调用 reduce() 的数组
+- initialValue?: 作为第一次调用 callback 函数时的第一个参数的值。 如果没有提供初始值，则将使用数组中的第一个元素。 **在没有初始值的空数组上调用 reduce 将报错**
 
 返回值：函数累计处理的结果
 

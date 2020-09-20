@@ -30,10 +30,9 @@ export class SingleList<T> {
   }
 
   // 顺序查找第一个元素
-  find({ value, callback }: {value?: T, callback?: (value: T) => boolean}) {
+  find({ value, callback }: { value?: T; callback?: (value: T) => boolean }) {
     let curNode: SingleNode<T> | null = this.head
     while (curNode) {
-
       if (callback && callback(curNode.value)) {
         return curNode
       }
@@ -88,15 +87,20 @@ export class SingleList<T> {
     curNode.next = insertNode
   }
 
-  findPrev({ value, callback }: {value?: T, callback?: (value: T) => boolean}): SingleNode<T> | null {
+  findPrev({
+    value,
+    callback,
+  }: {
+    value?: T
+    callback?: (value: T) => boolean
+  }): SingleNode<T> | null {
     let curNode = this.head
     while (curNode.next) {
-
-      if(callback && callback(curNode.next.value)) {
+      if (callback && callback(curNode.next.value)) {
         return curNode
       }
 
-      if(isEqual(curNode.next.value, value)) {
+      if (isEqual(curNode.next.value, value)) {
         return curNode
       }
 
@@ -160,7 +164,7 @@ singleList.append(2)
 singleList.append(4)
 singleList.append(7)
 singleList.append(2)
-console.info(singleList.find({value: 3}))
+console.info(singleList.find({ value: 3 }))
 console.info(singleList.findByIndex(4))
 console.info(singleList.findIndexByValue(2, 3))
 singleList.remove(2)
