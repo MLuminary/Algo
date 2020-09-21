@@ -64,13 +64,34 @@ class HashTable<T extends Value> {
     return null
   }
 
+  /**
+   * 会根据之前的值选择添加 or 覆盖
+   */
+  public update(key: T['key'], value: Omit<T, 'key'>) {
+    const index = this.hash(key)
+    if (this.buckets[index]) {
+      const item = this.buckets[index]
+      if (item instanceof SingleList) {
+        const node = item.find({ callback: (value) => value.key === key })
+        if (!node) {
+          throw new Error('you need add it first')
+        }
+        node.value = { ...node.value, ...value }
+      } else {
+        this.buckets[index] = { ...this.buckets[index], ...value } as T
+      }
+    } else {
+      throw new Error('you need add it first')
+    }
+  }
+
   public delete(key: T['key']) {
     const index = this.hash(key)
     if (this.buckets[index]) {
       const item = this.buckets[index]
       if (item instanceof SingleList) {
         const prevNode = item.findPrev({
-          callback: (value) => value.key === key,
+          callback: (value) => value.key === key
         })
         if (prevNode) {
           prevNode.next = prevNode.next!.next
@@ -89,7 +110,8 @@ hashTable.put({ key: 221301, name: '张三' })
 hashTable.put({ key: 231301, name: '王五' })
 hashTable.put({ key: 221303, name: '李四' })
 hashTable.put({ key: 241202, name: '杨八' })
+hashTable.update(231301, { jump: 1.2 })
 
-hashTable.delete(221301)
+hashTable.delete(241202)
 
 console.info(hashTable)

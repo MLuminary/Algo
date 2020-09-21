@@ -31,8 +31,9 @@ export class SingleList<T> {
 
   // 顺序查找第一个元素
   find({ value, callback }: { value?: T; callback?: (value: T) => boolean }) {
-    let curNode: SingleNode<T> | null = this.head
+    let curNode: SingleNode<T> | null = this.head.next
     while (curNode) {
+      // 除去头结点的 null
       if (callback && callback(curNode.value)) {
         return curNode
       }
