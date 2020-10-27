@@ -50,3 +50,9 @@ const postOrder(node: TreeNode) {
   console.info(node)
 }
 ```
+
+## 平衡二叉树
+
+假设我们先插入 6，再插入 4，3，2，1，这样二叉查找树就退化为一条链表，查找时间复杂度顿时退化成了 O(n)。因此为了避免这种情况，我们引申出了平衡二叉树。
+
+![tree2](img/tree2.png)
