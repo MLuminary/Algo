@@ -1,10 +1,9 @@
+import { Compare } from '../../types/types'
 /**
  * 平衡二叉树
  * 目的：解决普通查找二叉树失衡退化成链表的问题
  * 实现方式：每次插入和删除时都将检测操作路线上的节点的左右子树的高度，如果相差大于等于 2 则需要根据不同情况做一些调整来使其左右子树的高度差降为 2 以下
  */
-
-type Compare<T> = (data1: T, data2: T) => number
 
 class BalancedTreeNode<T> {
   public data: T

@@ -1,10 +1,9 @@
+import { Compare } from '../../types/types'
 /**
  * 堆「最大堆」
  * 采用数组存储：对于下标为 i 的结点，其左子结点的下标为 2 * i
  * 右子节点下标为 2 * i + 1，父节点下标为 Math.floor(i / 2)
  */
-
-type Compare<T> = (data1: T, data2: T) => number
 
 class Heap<T> {
   private length: number = 0

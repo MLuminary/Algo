@@ -1,9 +1,7 @@
+import { Compare } from '../../types/types'
 /**
- * 查找二叉树中树节点必须是可以比较的
- * 因为数据各种各样，因此用户需要在执行某种操作时主动传入 compare 函数
+ * 查找二叉树
  */
-
-type Compare<T> = (data1: T, data2: T) => number
 
 class TreeNode<T> {
   public data: T
