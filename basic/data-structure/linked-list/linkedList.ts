@@ -1,3 +1,6 @@
+/**
+ * 双向链表
+ */
 class LinkedNode<T> {
   public value: T
   public next: LinkedNode<T> | null
