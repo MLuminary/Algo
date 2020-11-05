@@ -6,6 +6,7 @@ import { SingleList } from './../linked-list/singleList'
  * 「先加快学习的进度！」
  */
 
+let dfsFounded = false
 class Graph {
   private v: number = 0 // 顶点最大点
   private adj: SingleList<number>[] = [] // 邻接表
@@ -62,6 +63,42 @@ class Graph {
     }
   }
 
+  /**
+   * 广度优先遍历
+   */
+  public dfs(s: number, e: number) {
+    dfsFounded = false
+    const visited: boolean[] = [] // 记录该点有没有被访问
+    visited[s] = true
+    const prev: number[] = [] // prev[2] = 3 则为 3 -> 2
+    for (let i = 0; i < this.v; i++) {
+      prev[i] = -1
+    }
+    this.recurDfs(s, e, visited, prev)
+    this.print(prev, s, e)
+  }
+
+  private recurDfs(w: number, e: number, visited: boolean[], prev: number[]) {
+    if (dfsFounded) {
+      return
+    }
+    visited[w] = true
+    if (w === e) {
+      dfsFounded = true
+      return
+    }
+    let curNode = this.adj[w].findByIndex(0)
+    while (curNode) {
+      const next = curNode.value
+      if (!visited[next]) {
+        prev[next] = w
+        // 继续向深层次遍历
+        this.recurDfs(next, e, visited, prev)
+      }
+      curNode = curNode.next
+    }
+  }
+
   public print(prev: number[], s: number, e: number) {
     let str = ''
     while (prev[e] !== -1 && e !== s) {
@@ -83,3 +120,4 @@ graph.addEdge(4, 6)
 graph.addEdge(5, 7)
 graph.addEdge(6, 7)
 graph.bfs(0, 6)
+graph.dfs(0, 6)
